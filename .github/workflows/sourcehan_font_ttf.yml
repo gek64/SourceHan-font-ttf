@@ -67,7 +67,7 @@ jobs:
           # 清理
           rm -rf OTF font *.txt
 
-          echo "$(date +'%Y%m%d')" >> $GITHUB_ENV
+          echo "DATE=$(date +'%Y%m%d')" >> $GITHUB_ENV
 
 
       - name: Remove old Releases
