@@ -5,8 +5,8 @@
 ## 思源字体包含
 - [思源黑体](https://github.com/adobe-fonts/source-han-sans) SC
 - [思源宋体](https://github.com/adobe-fonts/source-han-serif) SC
-- 思源黑体SC TTF
-- 思源宋体SC TTF
+- 思源黑体 SC TTF
+- 思源宋体 SC TTF
 
 ## 转换处理细节
 - 仅转换SC版本 `SourceHanSansSC` `SourceHanSerifSC`
