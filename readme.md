@@ -9,6 +9,7 @@
 ## 转换处理细节
 - 仅转换SC版本 `SourceHanSansSC` `SourceHanSerifSC`
 - 使用[otf2ttf](https://github.com/awesometoolbox/otf2ttf) 进行转换
+- 因为`otf2ttf`运行效率低下, 且无多线程, github actions 转换一个otf文件大概需要3-4分钟, 完成思源黑体+思源宋体两组14个字重大概需要50分钟左右
 
 ## 开源协议
 - 本项目采用[MIT协议](https://github.com/gek64/SourceHan-font-ttf/raw/main/LICENSE)
