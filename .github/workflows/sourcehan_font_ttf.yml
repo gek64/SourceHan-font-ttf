@@ -45,7 +45,7 @@ jobs:
           mv OTF/SimplifiedChinese/*.ttf font
           # 压缩
           cd font
-          zip -9 -r -UN=UTF8 ../SourceHanSerifSC_TTF_$(version).zip *.ttf
+          zip -9 -r -UN=UTF8 ../SourceHanSerifSC_TTF_$version.zip *.ttf
           cd ${{ github.workspace }}
           # 清理
           rm -rf OTF font *.txt
@@ -62,10 +62,13 @@ jobs:
           mv OTF/SimplifiedChinese/*.ttf font
           # 压缩
           cd font
-          zip -9 -r -UN=UTF8 ../SourceHanSansSC_TTF_$(version).zip *.ttf
+          zip -9 -r -UN=UTF8 ../SourceHanSansSC_TTF_$version.zip *.ttf
           cd ${{ github.workspace }}
           # 清理
           rm -rf OTF font *.txt
+
+          echo "$(date +'%Y%m%d')" >> $GITHUB_ENV
+
 
       - name: Remove old Releases
         uses: dev-drprasad/delete-older-releases@v0.2.0
@@ -79,5 +82,5 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "*.zip"
-          tag: $(date +"%Y%m%d")
+          tag: ${{ env.DATE }}
           token: ${{ secrets.GITHUB_TOKEN }}
