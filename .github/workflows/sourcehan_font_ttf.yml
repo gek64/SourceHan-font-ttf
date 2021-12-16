@@ -38,7 +38,7 @@ jobs:
           # 解压
           unzip SourceHanSerifSC.zip
           # 转换
-          otf2ttf OTF/SimplifiedChinese/SourceHanSerifSC-Bold.otf
+          otf2ttf OTF/SimplifiedChinese/*.otf
           # 获取版本
           version="$(curl --silent "https://api.github.com/repos/adobe-fonts/source-han-serif/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')"
           mkdir font
@@ -55,7 +55,7 @@ jobs:
           # 解压
           unzip SourceHanSansSC.zip
           # 转换
-          otf2ttf OTF/SimplifiedChinese/SourceHanSansSC-Bold.otf
+          otf2ttf OTF/SimplifiedChinese/*.otf
           # 获取版本
           version="$(curl --silent "https://api.github.com/repos/adobe-fonts/source-han-sans/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')"
           mkdir font
