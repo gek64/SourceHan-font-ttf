@@ -42,19 +42,19 @@ jobs:
           wget https://github.com/adobe-fonts/source-han-serif/releases/latest/download/SourceHanSerifSC.zip
           unzip SourceHanSerifSC.zip
           otf2ttf OTF/SimplifiedChinese/*.otf
-          mv OTF/SimplifiedChinese/*.otf .
+          mv OTF/SimplifiedChinese/*.ttf .
           zip -9 -r -UN=UTF8 SourceHanSerifSC.zip *.ttf
           # clean
-          rm -rf OTF *.otf
+          rm -rf OTF *.ttf
 
           # 思源黑体
           wget https://github.com/adobe-fonts/source-han-sans/releases/latest/download/SourceHanSansSC.zip
           unzip SourceHanSansSC.zip
           otf2ttf OTF/SimplifiedChinese/*.otf
-          mv OTF/SimplifiedChinese/*.otf .
+          mv OTF/SimplifiedChinese/*.ttf .
           zip -9 -r -UN=UTF8 SourceHanSansSC.zip *.ttf
           # clean
-          rm -rf OTF *.otf
+          rm -rf OTF *.ttf
 
       - name: Remove old Releases
         uses: dev-drprasad/delete-older-releases@v0.2.0
