@@ -16,12 +16,6 @@ on:
       - '**.md'
       - 'LICENSE'
   workflow_dispatch:
-    inputs:
-      version:
-        description: 'version'
-        required: false
-        default: 'latest'
-        # use ${{ github.event.inputs.version }}
 
 jobs:
   build:
@@ -39,22 +33,39 @@ jobs:
           pip install otf2ttf
 
           # 思源宋体
+          # 下载
           wget https://github.com/adobe-fonts/source-han-serif/releases/latest/download/SourceHanSerifSC.zip
+          # 解压
           unzip SourceHanSerifSC.zip
-          otf2ttf OTF/SimplifiedChinese/*.otf
-          mv OTF/SimplifiedChinese/*.ttf .
-          zip -9 -r -UN=UTF8 SourceHanSerifSC.zip *.ttf
-          # clean
-          rm -rf OTF *.ttf
+          # 转换
+          otf2ttf OTF/SimplifiedChinese/SourceHanSerifSC-Bold.otf
+          # 获取版本
+          version="$(curl --silent "https://api.github.com/repos/adobe-fonts/source-han-serif/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')"
+          mkdir font
+          mv OTF/SimplifiedChinese/*.ttf font
+          # 压缩
+          cd font
+          zip -9 -r -UN=UTF8 ../SourceHanSerifSC_TTF_$(version).zip *.ttf
+          cd ${{ github.workspace }}
+          # 清理
+          rm -rf OTF font *.txt
 
           # 思源黑体
           wget https://github.com/adobe-fonts/source-han-sans/releases/latest/download/SourceHanSansSC.zip
+          # 解压
           unzip SourceHanSansSC.zip
-          otf2ttf OTF/SimplifiedChinese/*.otf
-          mv OTF/SimplifiedChinese/*.ttf .
-          zip -9 -r -UN=UTF8 SourceHanSansSC.zip *.ttf
-          # clean
-          rm -rf OTF *.ttf
+          # 转换
+          otf2ttf OTF/SimplifiedChinese/SourceHanSansSC-Bold.otf
+          # 获取版本
+          version="$(curl --silent "https://api.github.com/repos/adobe-fonts/source-han-sans/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')"
+          mkdir font
+          mv OTF/SimplifiedChinese/*.ttf font
+          # 压缩
+          cd font
+          zip -9 -r -UN=UTF8 ../SourceHanSansSC_TTF_$(version).zip *.ttf
+          cd ${{ github.workspace }}
+          # 清理
+          rm -rf OTF font *.txt
 
       - name: Remove old Releases
         uses: dev-drprasad/delete-older-releases@v0.2.0
