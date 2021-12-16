@@ -36,8 +36,37 @@ jobs:
 
       - name: Build
         run: |
-          python -h
-          pip help
-          unzip --help
-          zip --help
-          7z --help
+          pip install otf2ttf
+
+          # 思源宋体
+          wget https://github.com/adobe-fonts/source-han-serif/releases/latest/download/SourceHanSerifSC.zip
+          unzip SourceHanSerifSC.zip
+          otf2ttf OTF/SimplifiedChinese/*.otf
+          mv OTF/SimplifiedChinese/*.otf .
+          zip -9 -r -UN=UTF8 SourceHanSerifSC.zip *.ttf
+          # clean
+          rm -rf OTF *.otf
+
+          # 思源黑体
+          wget https://github.com/adobe-fonts/source-han-sans/releases/latest/download/SourceHanSansSC.zip
+          unzip SourceHanSansSC.zip
+          otf2ttf OTF/SimplifiedChinese/*.otf
+          mv OTF/SimplifiedChinese/*.otf .
+          zip -9 -r -UN=UTF8 SourceHanSansSC.zip *.ttf
+          # clean
+          rm -rf OTF *.otf
+
+      - name: Remove old Releases
+        uses: dev-drprasad/delete-older-releases@v0.2.0
+        with:
+          keep_latest: 0
+          delete_tags: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "*.zip"
+          tag: $(date +"%Y%m%d")
+          token: ${{ secrets.GITHUB_TOKEN }}
