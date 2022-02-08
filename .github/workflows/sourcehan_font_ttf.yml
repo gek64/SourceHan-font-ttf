@@ -36,7 +36,7 @@ jobs:
           # 下载
           wget https://github.com/adobe-fonts/source-han-serif/releases/latest/download/09_SourceHanSerifSC.zip
           # 解压
-          unzip SourceHanSerifSC.zip
+          unzip 09_SourceHanSerifSC.zip
           # 转换
           otf2ttf OTF/SimplifiedChinese/*.otf
           # 获取版本
