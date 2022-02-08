@@ -34,7 +34,7 @@ jobs:
 
           # 思源宋体
           # 下载
-          wget https://github.com/adobe-fonts/source-han-serif/releases/latest/download/SourceHanSerifSC.zip
+          wget https://github.com/adobe-fonts/source-han-serif/releases/latest/download/09_SourceHanSerifSC.zip
           # 解压
           unzip SourceHanSerifSC.zip
           # 转换
