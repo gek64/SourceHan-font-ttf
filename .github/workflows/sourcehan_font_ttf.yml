@@ -32,7 +32,7 @@ jobs:
         run: |
           pip install otf2ttf
 
-          # 思源宋体
+          # 思源宋体SC
           # 下载
           wget https://github.com/adobe-fonts/source-han-serif/releases/latest/download/09_SourceHanSerifSC.zip
           # 解压
@@ -50,7 +50,25 @@ jobs:
           # 清理
           rm -rf OTF font *.txt
 
-          # 思源黑体
+          # 思源宋体TC
+          # 下载
+          wget https://github.com/adobe-fonts/source-han-serif/releases/latest/download/10_SourceHanSerifTC.zip
+          # 解压
+          unzip 10_SourceHanSerifTC.zip
+          # 转换
+          otf2ttf OTF/TraditionalChinese/*.otf
+          # 获取版本
+          version="$(curl --silent "https://api.github.com/repos/adobe-fonts/source-han-serif/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')"
+          mkdir font
+          mv OTF/TraditionalChinese/*.ttf font
+          # 压缩
+          cd font
+          zip -9 -r -UN=UTF8 ../SourceHanSerifTC_TTF_$version.zip *.ttf
+          cd ${{ github.workspace }}
+          # 清理
+          rm -rf OTF font *.txt
+
+          # 思源黑体SC
           wget https://github.com/adobe-fonts/source-han-sans/releases/latest/download/SourceHanSansSC.zip
           # 解压
           unzip SourceHanSansSC.zip
@@ -63,6 +81,23 @@ jobs:
           # 压缩
           cd font
           zip -9 -r -UN=UTF8 ../SourceHanSansSC_TTF_$version.zip *.ttf
+          cd ${{ github.workspace }}
+          # 清理
+          rm -rf OTF font *.txt
+
+          # 思源黑体TC
+          wget https://github.com/adobe-fonts/source-han-sans/releases/latest/download/SourceHanSansTC.zip
+          # 解压
+          unzip SourceHanSansTC.zip
+          # 转换
+          otf2ttf OTF/TraditionalChinese/*.otf
+          # 获取版本
+          version="$(curl --silent "https://api.github.com/repos/adobe-fonts/source-han-sans/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')"
+          mkdir font
+          mv OTF/TraditionalChinese/*.ttf font
+          # 压缩
+          cd font
+          zip -9 -r -UN=UTF8 ../SourceHanSansTC_TTF_$version.zip *.ttf
           cd ${{ github.workspace }}
           # 清理
           rm -rf OTF font *.txt
